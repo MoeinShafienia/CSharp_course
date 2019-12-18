@@ -1,0 +1,11 @@
+/home/moein/Desktop/charp/bin/Debug/netcoreapp3.1/charp
+/home/moein/Desktop/charp/bin/Debug/netcoreapp3.1/charp.deps.json
+/home/moein/Desktop/charp/bin/Debug/netcoreapp3.1/charp.runtimeconfig.json
+/home/moein/Desktop/charp/bin/Debug/netcoreapp3.1/charp.runtimeconfig.dev.json
+/home/moein/Desktop/charp/bin/Debug/netcoreapp3.1/charp.dll
+/home/moein/Desktop/charp/bin/Debug/netcoreapp3.1/charp.pdb
+/home/moein/Desktop/charp/obj/Debug/netcoreapp3.1/charp.csprojAssemblyReference.cache
+/home/moein/Desktop/charp/obj/Debug/netcoreapp3.1/charp.AssemblyInfoInputs.cache
+/home/moein/Desktop/charp/obj/Debug/netcoreapp3.1/charp.AssemblyInfo.cs
+/home/moein/Desktop/charp/obj/Debug/netcoreapp3.1/charp.dll
+/home/moein/Desktop/charp/obj/Debug/netcoreapp3.1/charp.pdb
