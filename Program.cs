@@ -33,11 +33,11 @@ namespace charp
 
             // *** LINQ
 
-            int[] array = new int[10];
-            Random rand = new Random();
-            for (int i =0 ; i < 10 ; i++) {
-                array[i] = rand.Next(0,1000);
-            }
+            // int[] array = new int[10];
+            // Random rand = new Random();
+            // for (int i =0 ; i < 10 ; i++) {
+            //     array[i] = rand.Next(0,1000);
+            // }
 
             // var scoreQuery =
             // from score in array
@@ -62,34 +62,34 @@ namespace charp
 
             //Console.WriteLine(numberOfTwos);
 
-            Person person1 = new Person(20,1,"ali","elahi");
-            Person person2 = new Person(20,2,"moein","shafienia");
-            Person person3 = new Person(20,3,"mohammad","borna");
+            // Person person1 = new Person(20,1,"ali","elahi");
+            // Person person2 = new Person(20,2,"moein","shafienia");
+            // Person person3 = new Person(20,3,"mohammad","borna");
 
-            List<Person> persons = new List<Person>();
-            persons.Add(person1);
-            persons.Add(person2);
-            persons.Add(person3);
+            // List<Person> persons = new List<Person>();
+            // persons.Add(person1);
+            // persons.Add(person2);
+            // persons.Add(person3);
 
-            Scores score1 = new Scores(1,18,19,20);
-            Scores score2 = new Scores(2,14,16,17);
-            Scores score3 = new Scores(3,12,18,15);
+            // Scores score1 = new Scores(1,18,19,20);
+            // Scores score2 = new Scores(2,14,16,17);
+            // Scores score3 = new Scores(3,12,18,15);
 
-            List<Scores> scores = new List<Scores>();
-            scores.Add(score1);
-            scores.Add(score2);
-            scores.Add(score3);
+            // List<Scores> scores = new List<Scores>();
+            // scores.Add(score1);
+            // scores.Add(score2);
+            // scores.Add(score3);
 
-            var innerGroupJoinQuery =
-            (from person in persons
-            join score in scores on person.id equals score.id
-            select new { name = person.name,
-                         lastName = person.lastName,
-                         id = person.id,
-                         cPlusPlus = score.cPlusPlus,
-                         cSharp = score.cSharp,
-                         java = score.java
-                          }).ToArray();
+            // var innerGroupJoinQuery =
+            // (from person in persons
+            // join score in scores on person.id equals score.id
+            // select new { name = person.name,
+            //              lastName = person.lastName,
+            //              id = person.id,
+            //              cPlusPlus = score.cPlusPlus,
+            //              cSharp = score.cSharp,
+            //              java = score.java
+            //               }).ToArray();
 
             // foreach(var i in innerGroupJoinQuery) {
             //     Console.WriteLine(i.name);
@@ -102,20 +102,58 @@ namespace charp
 
     
 
-            var averagePerson = 
-            (from p in innerGroupJoinQuery
-            select (p.cSharp + p.cPlusPlus + p.java)/3 where p.id == 1)
-            .ToList();
+            // var averagePerson = 
+            // (from p in innerGroupJoinQuery
+            // select (p.cSharp + p.cPlusPlus + p.java)/3 where p.id == 1)
+            // .ToList();
+
+            int[] array = {1,1,2,3,3,4,5};
+            string[] names = {"rahim","moein","saeed","behrad","mohammad"};
             
+
+            //var query = array.Where(a => a == 2).Any();
+            //var query = array.Any(a => a==2);
+
+            // var query = array.Where(a => a==3).First();
+            // var query2 = array.Where(a => a==1).FirstOrDefault();
+
+            // var query = array.Where(a => a==5).Single();
+            // var query2 = array.Where(a => a==1).SingleOrDefault();
+
+            //var query = names.Where(name => name.ToLower().EndsWith("m"));
+
+            Person2[] persons = {
+            new Person2("moein","shafi","yazd",1),
+            new Person2("ali","elahei","babol",2),
+            new Person2("moh","bona","teh",3)};
+
+            Salary[] salaries= {
+            new Salary(1,"dey",1000),
+            new Salary(1,"bahman",2000),
+            new Salary(1,"esfand",3000),
+            new Salary(2,"dey",500),
+            new Salary(2,"bahman",600),
+            new Salary(2,"esfand",700),
+            new Salary(3,"dey",1400),
+            new Salary(3,"bahman",1600),
+            new Salary(3,"esfand",600)};
+
+            var query = persons.GroupJoin(salaries,
+            person => person.id,
+            Salary => Salary.id,
+            (persons, salaryGroup) => new {
+                name = persons.name,
+                salary = salaryGroup.ToArray().Sum(s => s.salary)
+            }).OrderByDescending(x => x.salary).First();
 
             
 
+        
+            Console.WriteLine(query.name + " " + query.salary);
+            // foreach(var name in query) {
+            //     Console.WriteLine(name);
+            // }
             
-
-            
-            
-
-
             
         }
 
@@ -240,5 +278,31 @@ class Scores{
         this.java = java;
         this.cSharp = cSharp;
     }
+}
+
+class Person2 {
+    
+    public string name,lastName,address;
+    public int id;
+
+    public Person2(string name,string lastName,string address,int id){
+        this.name = name;
+        this.lastName = lastName;
+        this.address = address;
+        this.id = id;
+    }
+}
+
+class Salary {
+
+    public int id,salary;
+    public string month;
+
+    public Salary(int id,string month,int salary){
+        this.month = month;
+        this.salary = salary;
+        this.id = id;
+    }
+
 }
 
